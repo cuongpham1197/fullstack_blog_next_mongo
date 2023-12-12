@@ -5,7 +5,7 @@ import Image from "next/image";
 
 
 export async function getServerSideProps() {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const res = await fetch("http://localhost:3000/api/posts");
     const data = await res.json();
     return { props: { data } }
 }
@@ -14,7 +14,7 @@ const Blog = ({ data }) => {
     return (
         <div className={styles.mainContainer}>
             {data.map((item) => (
-                <Link href={`/blog/${item.id}`} className={styles.container} key={item.id}>
+                <Link href={`/blog/${item._id}`} className={styles.container} key={item._id}>
                     <div className={styles.imageContainer}>
                         <Image
                             src={item.img}
@@ -26,7 +26,7 @@ const Blog = ({ data }) => {
                     </div>
                     <div className={styles.content}>
                         <h1 className={styles.title}>{item.title}</h1>
-                        <p className={styles.desc}>{item.body}</p>
+                        <p className={styles.desc}>{item.desc}</p>
                     </div>
                 </Link>
             ))}
